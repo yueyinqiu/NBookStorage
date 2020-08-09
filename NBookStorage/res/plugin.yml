@@ -4,9 +4,9 @@ website: https://github.com/yueyinqiu/NBookStorage/wiki
 
 version: '1.00'
 author: yueyinqiu5990
-main: top.nololiyt.nbookstorage.RootPlugin
+main: top.nololiyt.bookstorage.RootPlugin
 
 commands:
-  nworldpermissions:
+  nbookstorage:
     description: "All commands for the plugin 'NBookStorage'."
     aliases: [nbs,books,nbooks,bookstorage]

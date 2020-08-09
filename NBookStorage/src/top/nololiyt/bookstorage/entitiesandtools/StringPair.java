@@ -40,4 +40,12 @@ public class StringPair
     {
         return new StringPair("{time}", value);
     }
+    public static StringPair material(String value)
+    {
+        return new StringPair("{material}", value);
+    }
+    public static StringPair metaValue(String value)
+    {
+        return new StringPair("{metaValue}", value);
+    }
 }

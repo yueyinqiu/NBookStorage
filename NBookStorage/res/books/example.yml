@@ -1,1 +1,17 @@
-# An example
+# An example.
+
+meta:
+  ==: ItemMeta
+  meta-type: BOOK_SIGNED
+  title: Permissions
+  author: yueyinqiu
+  pages:
+    - |-
+      Hello! Here list the permissions:
+
+      nbookstorage.override
+      nbookstorage.remove
+      nbookstorage.list
+      nbookstorage.get
+      nbookstorage.meta
+      nbookstorage.version

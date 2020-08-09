@@ -49,8 +49,8 @@ public class ListExecutor extends Executor
                 StringPair.senderName(commandSender.getName())
         });
     
-        String[] books = rootPlugin.getBooksManager().allBooks();
-        if (books.length == 0)
+        List<String> books = rootPlugin.getBooksManager().allBooks();
+        if (books.isEmpty())
         {
             messagesSender.send(messageKey.append("no-book"));
             return true;
@@ -60,7 +60,7 @@ public class ListExecutor extends Executor
         String beginning = getMessageItem(messagesManager, messageKey, "beginning");
         String separator = getMessageItem(messagesManager, messageKey, "separator");
         String ending = getMessageItem(messagesManager, messageKey, "ending");
-        messagesSender.sendJointed(beginning, ending, separator, Arrays.asList(books));
+        messagesSender.sendJointed(beginning, ending, separator, books);
         return true;
     }
     

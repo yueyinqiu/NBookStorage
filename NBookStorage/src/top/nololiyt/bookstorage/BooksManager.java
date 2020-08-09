@@ -5,10 +5,17 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import top.nololiyt.bookstorage.entitiesandtools.StringPair;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.print.Book;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BooksManager
 {
@@ -22,7 +29,7 @@ public class BooksManager
     private File getDirectory()
     {
         File file = new File(rootPlugin.getDataFolder().getAbsolutePath(), "books");
-        if (!file.exists())
+        if ((!file.exists()) || (!file.isDirectory()))
         {
             file.mkdirs();
             rootPlugin.saveResource("books/example.yml", true);
@@ -33,23 +40,34 @@ public class BooksManager
     public BooksManager(RootPlugin rootPlugin)
     {
         this.rootPlugin = rootPlugin;
+        getDirectory();
     }
     
-    public String[] allBooks()
+    public List<String> allBooks()
     {
-        return getDirectory().list();
+        List<String> result = new ArrayList<>();
+        for (String f : getDirectory().list())
+        {
+            if (f.endsWith(".yml"))
+                result.add(f.substring(0, f.length() - 4));
+        }
+        return result;
     }
     
-    public ItemMeta get(String id)
+    public BookMeta get(String id)
     {
         File f = new File(getDirectory().getAbsolutePath(), id + ".yml");
         if(!f.exists())
             return null;
         YamlConfiguration configuration = YamlConfiguration.loadConfiguration(f);
         Object obj = configuration.get("meta");
-        if(obj instanceof ItemMeta)
-            return (ItemMeta)obj;
-        return new ItemStack(Material.WRITABLE_BOOK).getItemMeta();
+        if(obj instanceof BookMeta)
+            return (BookMeta)obj;
+        
+        BookMeta meta = (BookMeta)(new ItemStack(rootPlugin.getMaterialProvider().WrittenBook()).getItemMeta());
+        meta.setAuthor("NBookStorage");
+        meta.addPage("Something wrong!");
+        return meta;
     }
     
     public boolean add(String id, ItemMeta meta) throws IOException
@@ -70,12 +88,27 @@ public class BooksManager
     private void override(File f, ItemMeta meta) throws IOException
     {
         YamlConfiguration configuration = new YamlConfiguration();
-        configuration.set("meta", meta);
+        configuration.set("meta", toBookMeta(meta));
         configuration.save(f);
     }
     public boolean remove(String id)
     {
         File f = new File(getDirectory().getAbsolutePath(), id + ".yml");
         return f.delete();
+    }
+    
+    public BookMeta toBookMeta(ItemMeta meta)
+    {
+        if(meta == null)
+        {
+            return null;
+        }
+        if(meta instanceof BookMeta)
+        {
+            return (BookMeta)meta.clone();
+        }
+        ItemStack book = new ItemStack(rootPlugin.getMaterialProvider().WrittenBook());
+        book.setItemMeta(meta);
+        return (BookMeta) book.getItemMeta();
     }
 }

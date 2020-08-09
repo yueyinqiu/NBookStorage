@@ -33,7 +33,7 @@ public class RemoveExecutor extends Executor
         switch (ordinal)
         {
             case 0:
-                return Arrays.asList(rootPlugin.getBooksManager().allBooks());
+                return rootPlugin.getBooksManager().allBooks();
             default:
                 return new ArrayList<>();
         }

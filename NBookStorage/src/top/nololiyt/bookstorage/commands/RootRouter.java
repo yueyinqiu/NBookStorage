@@ -2,9 +2,11 @@ package top.nololiyt.bookstorage.commands;
 
 import org.bukkit.command.CommandSender;
 import top.nololiyt.bookstorage.RootPlugin;
+import top.nololiyt.bookstorage.commands.executors.GetExecutor;
 import top.nololiyt.bookstorage.commands.executors.ListExecutor;
 import top.nololiyt.bookstorage.commands.executors.OverrideExecutor;
 import top.nololiyt.bookstorage.commands.executors.RemoveExecutor;
+import top.nololiyt.bookstorage.commands.executors.meta.MetaRouter;
 import top.nololiyt.bookstorage.commands.executors.version.VersionRouter;
 import top.nololiyt.bookstorage.entitiesandtools.DotDividedStringBuilder;
 
@@ -55,7 +57,9 @@ public class RootRouter extends Router
             put("override", new OverrideExecutor());
             put("list", new ListExecutor());
             put("remove", new RemoveExecutor());
+            put("get", new GetExecutor());
             
+            put("meta", new MetaRouter());
             put("version", new VersionRouter());
         }
     };

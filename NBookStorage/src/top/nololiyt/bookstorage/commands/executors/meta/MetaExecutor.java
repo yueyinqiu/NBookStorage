@@ -1,16 +1,9 @@
-package top.nololiyt.bookstorage.commands.executors;
+package top.nololiyt.bookstorage.commands.executors.meta;
 
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlRepresenter;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
-import org.bukkit.inventory.meta.ItemMeta;
-import top.nololiyt.bookstorage.BooksManager;
 import top.nololiyt.bookstorage.RootPlugin;
 import top.nololiyt.bookstorage.commands.Executor;
 import top.nololiyt.bookstorage.entitiesandtools.DotDividedStringBuilder;
@@ -19,24 +12,26 @@ import top.nololiyt.bookstorage.entitiesandtools.StringPair;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class OverrideExecutor extends Executor
+public abstract class MetaExecutor extends Executor
 {
-    protected final static String layerName = "override";
+    
+    protected abstract String getMetaKey();
     
     @Override
     public String permissionName()
     {
-        return layerName;
+        return null;
     }
     
     @Override
     public String messageKey()
     {
-        return layerName;
+        return getMetaKey();
     }
+    
+    protected abstract List<String> getTabValues(RootPlugin rootPlugin);
     
     @Override
     public List<String> getTabComplete(RootPlugin rootPlugin, int ordinal)
@@ -44,48 +39,48 @@ public class OverrideExecutor extends Executor
         switch (ordinal)
         {
             case 0:
-                List<String> r = rootPlugin.getBooksManager().allBooks();
-                if(r.isEmpty())
-                    r.add("ANewBook");
-                return r;
+                return rootPlugin.getBooksManager().allBooks();
+            case 1:
+                return getTabValues(rootPlugin);
             default:
                 return new ArrayList<>();
         }
     }
+    
+    protected abstract BookMeta run(RootPlugin rootPlugin,
+                                    BookMeta meta,
+                                    String value);
     
     @Override
     protected boolean run(int layer, RootPlugin rootPlugin,
                           DotDividedStringBuilder messageKey, CommandSender commandSender,
                           String[] args)
     {
-        if (args.length - 1 != layer)
+        if (args.length - 1 != layer + 1)
             return false;
-        
+    
         String bookId = args[layer];
+        String metaValue = args[layer + 1];
         MessagesSender messagesSender = new MessagesSender(rootPlugin.getMessagesManager(),
                 commandSender, new StringPair[]{
                 StringPair.bookId(bookId),
-                StringPair.senderName(commandSender.getName())
+                StringPair.senderName(commandSender.getName()),
+                StringPair.metaValue(metaValue)
         });
-    
-        if (!(commandSender instanceof Player))
-        {
-            messagesSender.send(messageKey.append("without-a-book"));
-            return true;
-        }
-        Player player = (Player) commandSender;
-        ItemStack book = player.getInventory().getItemInMainHand();
         
-        if(book.getType() != rootPlugin.getMaterialProvider().WritableBook() &&
-                book.getType() != rootPlugin.getMaterialProvider().WrittenBook())
+        BookMeta meta = rootPlugin.getBooksManager().get(bookId);
+        if (meta == null)
         {
-            messagesSender.send(messageKey.append("without-a-book"));
+            messagesSender.send(messageKey.append("no-such-book"));
             return true;
         }
+        BookMeta r = run(rootPlugin, meta, metaValue);
+        if (r == null)
+            return false;
         
         try
         {
-            rootPlugin.getBooksManager().override(bookId, book.getItemMeta());
+            rootPlugin.getBooksManager().override(bookId, r);
             messagesSender.send(messageKey.append("completed"));
         }
         catch (IOException ex)
