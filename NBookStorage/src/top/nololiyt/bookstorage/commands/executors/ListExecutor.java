@@ -19,7 +19,7 @@ public class ListExecutor extends Executor
     @Override
     public String permissionName()
     {
-        return null;
+        return layerName;
     }
     
     @Override

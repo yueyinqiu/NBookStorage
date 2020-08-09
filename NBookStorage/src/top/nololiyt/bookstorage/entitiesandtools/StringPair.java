@@ -31,4 +31,13 @@ public class StringPair
     {
         return new StringPair("{bookId}", value);
     }
+    public static StringPair version(String value)
+    {
+        return new StringPair("{version}", value);
+    }
+    
+    public static StringPair time(String value)
+    {
+        return new StringPair("{time}", value);
+    }
 }

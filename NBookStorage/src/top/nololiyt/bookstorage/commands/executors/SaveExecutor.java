@@ -12,7 +12,7 @@ import top.nololiyt.bookstorage.entitiesandtools.StringPair;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+/*
 public class SaveExecutor extends Executor
 {
     protected final static String layerName = "save";
@@ -103,3 +103,4 @@ public class SaveExecutor extends Executor
         messagesSender.send(messageKey.append("completed"));
     }
 }
+*/

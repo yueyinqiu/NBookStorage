@@ -18,7 +18,7 @@ public class RemoveExecutor extends Executor
     @Override
     public String permissionName()
     {
-        return null;
+        return layerName;
     }
     
     @Override
