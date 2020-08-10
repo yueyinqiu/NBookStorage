@@ -1,0 +1,3 @@
+files:
+  - source: /NBookStorage/res/messages.yml
+    translation: /translations/%language%.yml
