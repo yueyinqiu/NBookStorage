@@ -1,0 +1,113 @@
+---
+#messages.yml
+messages:
+  help: |
+    &r&3[&bNBookStorage&3]:
+    你好，{senderName}&r&3！试试这些命令吧！
+    /nbooks override <book_id> - 储存手上的书（权限：nbookstorage.override）
+    /nbooks remove <book_id> - 移除一本书（权限：nbookstorage.remove）
+    /nbooks list - 列出所有书（权限：nbookstorage.list）
+    /nbooks get <book_id> <material> - 获取一本书（权限：nbookstorage.get）
+    /nbooks meta - 设置书meta（权限：nbookstorage.meta）
+    /nbooks version - 获取插件版本信息（Permission: nbookstorage.version）
+  #Available Arg(s): {senderName}.
+  override:
+    without-a-book: |
+      &r&3[&bNBookStorage&3]: 额，{senderName}&r&3，书在哪呢？
+    #Available Arg(s): {senderName}, {bookId}.
+    completed: |
+      &r&3[&bNBookStorage&3]: 报告！书已经储存，其ID：'{bookId}&r&3'。
+    #Available Arg(s): {senderName}, {bookId}.
+    failed: |
+      &r&3[&bNBookStorage&3]: 额？发生了啥？我存不了这书。
+  #Available Arg(s): {senderName}, {bookId}.
+  remove:
+    completed: |
+      &r&3[&bNBookStorage&3]: 报告！书 {bookId}&r&3 已移除！
+    #Available Arg(s): {senderName}, {bookId}.
+    no-such-book: |
+      &r&3[&bNBookStorage&3]: 额，没这书啊。
+  #Available Arg(s): {senderName}, {bookId}.
+  list:
+    list:
+      #The following 3 messages will get jointed together before being sent.
+      #They will be jointed as "{beginning}{mark1}{separator}{mark2}{separator}...{markX}{ending}".
+      #The blank characters will be jointed as they are, expect the ones at the beginning of "beginning" and at the end of "ending".
+      beginning: "&r&3[&bNBookStorage&3]:\n报告！有这些书：\n"
+      #Available Arg(s): {senderName}.
+      separator: "&r&3、"
+      #Available Arg(s): {senderName}.
+      ending: "&r&3\n以上。"
+    #Available Arg(s): {senderName}.
+    no-book: "&r&3[&bNBookStorage&3]: 额，一本书都没。"
+  #Available Arg(s): {senderName}.
+  get:
+    not-a-player: |
+      &r&3[&bNBookStorage&3]: 额，{senderName}&r&3？你是谁？
+    #Available Arg(s): {senderName}, {bookId}, {material}.
+    not-such-book: |
+      &r&3[&bNBookStorage&3]: 额，没这书啊。
+    #Available Arg(s): {senderName}, {bookId}, {material}.
+    completed: |
+      &r&3[&bNBookStorage&3]: 拿去吧。
+  #Available Arg(s): {senderName}, {bookId}, {material}.
+  meta:
+    help: |
+      &r&3[&bNBookStorage&3]:
+      试试这些命令！
+      /nbooks meta author <book_id> <author> -- 设置作者
+      /nbooks meta generation <book_id> <generation> -- 设置代
+      /nbooks meta title <book_id> <title> -- 设置标题
+    #Available Arg(s): {senderName}.
+    author:
+      completed: |
+        &r&3[&bNBookStorage&3]: 报告！作者已改为{metaValue}&r&3。
+      #Available Arg(s): {bookId}, {senderName}, {metaValue}.
+      no-such-book: |
+        &r&3[&bNBookStorage&3]: 额，没这书啊。
+      #Available Arg(s): {bookId}, {senderName}, {metaValue}.
+      failed: |
+        &r&3[&bNBookStorage&3]: 额，发生了啥？我存不了这书。
+    #Available Arg(s): {senderName}, {bookId}.
+    generation:
+      completed: |
+        &r&3[&bNBookStorage&3]: 报告！代已改为{metaValue}&r&3。
+      #Available Arg(s): {bookId}, {senderName}, {metaValue}.
+      no-such-book: |
+        &r&3[&bNBookStorage&3]: 额，没这书啊。
+      #Available Arg(s): {bookId}, {senderName}, {metaValue}.
+      failed: |
+        &r&3[&bNBookStorage&3]: 额，发生了啥？我存不了这书。
+    #Available Arg(s): {senderName}, {bookId}.
+    title:
+      completed: |
+        &r&3[&bNBookStorage&3]: 报告！标题已改为{metaValue}&r&3。
+      #Available Arg(s): {bookId}, {senderName}, {metaValue}.
+      no-such-book: |
+        &r&3[&bNBookStorage&3]: 额，没这书啊。
+      #Available Arg(s): {bookId}, {senderName}, {metaValue}.
+      failed: |
+        &r&3[&bNBookStorage&3]: 额，发生了啥？我存不了这书。
+  #Available Arg(s): {senderName}, {bookId}.
+  version:
+    help: |
+      &r&3[&bNBookStorage&3]:
+      试试这些命令！
+      /nbooks version current -- 获取当前版本信息
+      /nbooks version latest -- 获取最新版本信息
+    #Available Arg(s): {senderName}.
+    current:
+      message: |
+        &r&3[&bNBookStorage&3]: 报告！当前版本是 '{version}&r&3'。
+    #Available Arg(s): {senderName}, {version}.
+    latest:
+      message: |
+        &r&3[&bNBookStorage&3]:
+        报告，最新版本是 '{version}&r&3' ({time}&r&3)。
+        你可以在 https://yueyinqiu.github.io/NBookStorage/download 下载它。
+      #Available Arg(s): {senderName}, {version}, {time}.
+      checker-not-enabled: |
+        &r&3[&bNBookStorage&3]: 额，更新检测器未启用。
+      #Available Arg(s): {senderName}.
+      failed-to-check: |
+        &r&3[&bNBookStorage&3]: 额，我不知道发生了啥，但更新检测失败了。
