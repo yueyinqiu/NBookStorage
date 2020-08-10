@@ -2,7 +2,7 @@ name: NBookStorage
 description: A tool to save books as yaml files.
 website: https://github.com/yueyinqiu/NBookStorage/wiki
 
-version: '1.00'
+version: '1.10'
 author: yueyinqiu5990
 main: top.nololiyt.bookstorage.RootPlugin
 

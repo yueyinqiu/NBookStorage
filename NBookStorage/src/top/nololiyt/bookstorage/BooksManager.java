@@ -65,6 +65,7 @@ public class BooksManager
             return (BookMeta)obj;
         
         BookMeta meta = (BookMeta)(new ItemStack(rootPlugin.getMaterialProvider().WrittenBook()).getItemMeta());
+        meta.setTitle("Error!");
         meta.setAuthor("NBookStorage");
         meta.addPage("Something wrong!");
         return meta;
@@ -103,12 +104,29 @@ public class BooksManager
         {
             return null;
         }
+        BookMeta result;
         if(meta instanceof BookMeta)
         {
-            return (BookMeta)meta.clone();
+            result = (BookMeta)meta.clone();
         }
-        ItemStack book = new ItemStack(rootPlugin.getMaterialProvider().WrittenBook());
-        book.setItemMeta(meta);
-        return (BookMeta) book.getItemMeta();
+        else
+        {
+            ItemStack book = new ItemStack(rootPlugin.getMaterialProvider().WrittenBook());
+            book.setItemMeta(meta);
+            result = (BookMeta) book.getItemMeta();
+        }
+        if(!result.hasAuthor())
+        {
+            result.setAuthor("NBookStorage");
+        }
+        if(!result.hasTitle())
+        {
+            result.setTitle("DefaultTitle");
+        }
+        if(!result.hasPages())
+        {
+            result.setPages("Default Content");
+        }
+        return result;
     }
 }
