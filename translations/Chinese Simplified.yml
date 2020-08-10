@@ -1,0 +1,113 @@
+---
+#messages.yml
+messages:
+  help: |
+    &r&3[&bNBookStorage&3]:
+    Hello, {senderName}&r&3! Try these commands!
+    /nbooks override <book_id> (Permission Required: "nbookstorage.override")
+    /nbooks remove <book_id> (Permission Required: "nbookstorage.remove")
+    /nbooks list (Permission Required: "nbookstorage.list")
+    /nbooks get <book_id> <material> (Permission Required: "nbookstorage.get")
+    /nbooks meta (Permission Required: "nbookstorage.meta")
+    /nbooks version (Permission Required: "nbookstorage.version")
+  #Available Arg(s): {senderName}.
+  override:
+    without-a-book: |
+      &r&3[&bNBookStorage&3]: Um, {senderName}&r&3? Where is the book?
+    #Available Arg(s): {senderName}, {bookId}.
+    completed: |
+      &r&3[&bNBookStorage&3]: Well, the book has been saved with id '{bookId}&r&3'.
+    #Available Arg(s): {senderName}, {bookId}.
+    failed: |
+      &r&3[&bNBookStorage&3]: Um, what happened? I can't save the book.
+  #Available Arg(s): {senderName}, {bookId}.
+  remove:
+    completed: |
+      &r&3[&bNBookStorage&3]: Well, the book '{bookId}&r&3' has been removed.
+    #Available Arg(s): {senderName}, {bookId}.
+    no-such-book: |
+      &r&3[&bNBookStorage&3]: Uh, there isn't a book with id '{bookId}&r&3'.
+  #Available Arg(s): {senderName}, {bookId}.
+  list:
+    list:
+      #The following 3 messages will get jointed together before being sent.
+      #They will be jointed as "{beginning}{mark1}{separator}{mark2}{separator}...{markX}{ending}".
+      #The blank characters will be jointed as they are, expect the ones at the beginning of "beginning" and at the end of "ending".
+      beginning: "&r&3[&bNBookStorage&3]:\nWell, there are the books:\n"
+      #Available Arg(s): {senderName}.
+      separator: "&r&3, "
+      #Available Arg(s): {senderName}.
+      ending: "&r&3\nThat's all."
+    #Available Arg(s): {senderName}.
+    no-book: "&r&3[&bNBookStorage&3]: Uh, there is no book."
+  #Available Arg(s): {senderName}.
+  get:
+    not-a-player: |
+      &r&3[&bNBookStorage&3]: Um, {senderName}&r&3? Who are you?
+    #Available Arg(s): {senderName}, {bookId}, {material}.
+    not-such-book: |
+      &r&3[&bNBookStorage&3]: Uh, there isn't a book with id '{bookId}&r&3'.
+    #Available Arg(s): {senderName}, {bookId}, {material}.
+    completed: |
+      &r&3[&bNBookStorage&3]: Well, here's your book.
+  #Available Arg(s): {senderName}, {bookId}, {material}.
+  meta:
+    help: |
+      &r&3[&bNBookStorage&3]:
+      Try these commands!
+      /nbooks meta author <book_id> <author> -- To set a book's author.
+      /nbooks meta generation <book_id> <generation> -- To set a book's generation.
+      /nbooks meta title <book_id> <title> -- To set a book's title.
+    #Available Arg(s): {senderName}.
+    author:
+      completed: |
+        &r&3[&bNBookStorage&3]: Well, the author of the book has been set to {metaValue}&r&3.
+      #Available Arg(s): {bookId}, {senderName}, {metaValue}.
+      no-such-book: |
+        &r&3[&bNBookStorage&3]: Uh, there isn't a book with id '{bookId}&r&3'.
+      #Available Arg(s): {bookId}, {senderName}, {metaValue}.
+      failed: |
+        &r&3[&bNBookStorage&3]: Um, what happened? I can't save the book.
+    #Available Arg(s): {senderName}, {bookId}.
+    generation:
+      completed: |
+        &r&3[&bNBookStorage&3]: Well, the generation of the book has been set to {metaValue}&r&3.
+      #Available Arg(s): {bookId}, {senderName}, {metaValue}.
+      no-such-book: |
+        &r&3[&bNBookStorage&3]: Uh, there isn't a book with id '{bookId}&r&3'.
+      #Available Arg(s): {bookId}, {senderName}, {metaValue}.
+      failed: |
+        &r&3[&bNBookStorage&3]: Um, what happened? I can't save the book.
+    #Available Arg(s): {senderName}, {bookId}.
+    title:
+      completed: |
+        &r&3[&bNBookStorage&3]: Well, the title of the book has been set to {metaValue}&r&3.
+      #Available Arg(s): {bookId}, {senderName}, {metaValue}.
+      no-such-book: |
+        &r&3[&bNBookStorage&3]: Uh, there isn't a book with id '{bookId}&r&3'.
+      #Available Arg(s): {bookId}, {senderName}, {metaValue}.
+      failed: |
+        &r&3[&bNBookStorage&3]: Um, what happened? I can't save the book.
+  #Available Arg(s): {senderName}, {bookId}.
+  version:
+    help: |
+      &r&3[&bNBookStorage&3]:
+      Try these commands!
+      /nbooks version current -- To get the current version info.
+      /nbooks version latest -- To get the latest version info.
+    #Available Arg(s): {senderName}.
+    current:
+      message: |
+        &r&3[&bNBookStorage&3]: Well, the current version is '{version}&r&3'.
+    #Available Arg(s): {senderName}, {version}.
+    latest:
+      message: |
+        &r&3[&bNBookStorage&3]:
+        Well, the latest version is '{version}&r&3' ({time}&r&3).
+        You may download it at 'https://yueyinqiu.github.io/NWorldPermissions/download'.
+      #Available Arg(s): {senderName}, {version}, {time}.
+      checker-not-enabled: |
+        &r&3[&bNBookStorage&3]: Uh, the update checker isn't enabled.
+      #Available Arg(s): {senderName}.
+      failed-to-check: |
+        &r&3[&bNBookStorage&3]: Um, I don't know what happened, but actually I can't check the update.
