@@ -4,12 +4,12 @@ messages:
   help: |
     &r&3[&bNBookStorage&3]:
     Hello, {senderName}&r&3! Try these commands!
-    /nbooks override <book_id> (Permission Required: "nbookstorage.override")
-    /nbooks remove <book_id> (Permission Required: "nbookstorage.remove")
-    /nbooks list (Permission Required: "nbookstorage.list")
-    /nbooks get <book_id> <material> (Permission Required: "nbookstorage.get")
-    /nbooks meta (Permission Required: "nbookstorage.meta")
-    /nbooks version (Permission Required: "nbookstorage.version")
+    /nbooks override <book_id> - To save the book in your hand. (Permission: nbookstorage.override)
+    /nbooks remove <book_id> - To remove a book. (Permission: nbookstorage.remove)
+    /nbooks list - To list the books. (Permission: nbookstorage.list)
+    /nbooks get <book_id> <material> - To get a book. (Permission: nbookstorage.get)
+    /nbooks meta - To set a book's meta. (Permission: nbookstorage.meta)
+    /nbooks version - To get the version infos of the plugin. (Permission: nbookstorage.version)
   # Available Arg(s): {senderName}.
 
   override:
@@ -110,7 +110,7 @@ messages:
       message: |
         &r&3[&bNBookStorage&3]:
         Well, the latest version is '{version}&r&3' ({time}&r&3).
-        You may download it at 'https://yueyinqiu.github.io/NWorldPermissions/download'.
+        You may download it at 'https://yueyinqiu.github.io/NBookStorage/download'.
       # Available Arg(s): {senderName}, {version}, {time}.
       checker-not-enabled: |
         &r&3[&bNBookStorage&3]: Uh, the update checker isn't enabled.

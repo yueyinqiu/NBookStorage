@@ -3,15 +3,11 @@
 meta:
   ==: ItemMeta
   meta-type: BOOK_SIGNED
-  title: Permissions
+  title: NBookStorage
   author: yueyinqiu
   pages:
     - |-
-      Hello! Here list the permissions:
-
-      nbookstorage.override
-      nbookstorage.remove
-      nbookstorage.list
-      nbookstorage.get
-      nbookstorage.meta
-      nbookstorage.version
+      NBookStorage!
+      NBookStorage!!
+      NBookStorage!!!
+      NBookStorage!!!!
