@@ -1,3 +1,3 @@
-# NWorldPermissions
+# NBookStorage
 
-Don't forget to visit [WIKI](https://github.com/yueyinqiu/NWorldPermissions/wiki), especially [the Offline Players Tracker page](https://github.com/yueyinqiu/NWorldPermissions/wiki/Offline-Players-Tracker), otherwise you may misuse some features.
+Visit [WIKI](https://github.com/yueyinqiu/NBookStorage/wiki) to know more.
