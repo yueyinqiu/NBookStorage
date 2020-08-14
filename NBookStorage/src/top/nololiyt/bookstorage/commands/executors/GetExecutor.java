@@ -42,8 +42,8 @@ public class GetExecutor extends Executor
                 return new ArrayList<String>()
                 {
                     {
-                        add(rootPlugin.getMaterialProvider().WritableBook().toString());
-                        add(rootPlugin.getMaterialProvider().WrittenBook().toString());
+                        add(rootPlugin.getMaterialProvider().WritableBook().name());
+                        add(rootPlugin.getMaterialProvider().WrittenBook().name());
                     }
                 };
             default:
